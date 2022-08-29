@@ -1,0 +1,27 @@
+# For Java 8, try this
+FROM adoptopenjdk/openjdk8:alpine-jre
+
+# For Java 11, try this
+#FROM openjdk-8-jdk
+
+#RUN apk add --no-cache maven git openjdk-8-jdk
+
+#RUN apk install apache2
+
+
+# Refer to Maven build -> finalName
+ARG JAR_FILE=target/spring-boot-web.jar
+
+# cd /opt/app
+WORKDIR /home/mondee
+
+#RUN git clone http://10.11.1.30/tomato/tomato-main.git
+
+#RUN mvn install package
+# cp target/spring-boot-web.jar /opt/app/app.jar
+COPY ${JAR_FILE} app.jar
+
+# java -jar /opt/app/app.jar
+ENTRYPOINT ["java","-jar","/home/mondee/app.jar"]
+
+EXPOSE 8080
